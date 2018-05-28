@@ -1,0 +1,27 @@
+{
+    "name": "amstaff/generator",
+    "description": "Laravel project generator package",
+    "license": "MIT",
+    "type": "library",
+    "require": {
+        "php": ">=7.1.3",
+        "illuminate/support": "5.*"
+    },
+    "author": {
+        "name": "León Alvarez Del Canto ",
+        "email": "leon@leon-design.es"
+    },
+    "autoload": {
+        "psr-4": {
+            "Amstaff\\Generator\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Amstaff\\Generator\\GeneratorServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev"
+}
