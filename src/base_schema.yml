@@ -1,14 +1,14 @@
 User:
   attributes:
     id:
-      autoincrement:true
+      autoincrement: true
     username:
       type: string(255)
-      unique:true
+      unique: true
       index: true
     email:
       type: string
-      unique:true
+      unique: true
     type:
       type: enum
       options:
@@ -30,7 +30,7 @@ Post:
       type: string
     slug:
       type: string
-      unique:true
+      unique: true
     body:
       type: text
     relations:

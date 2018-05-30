@@ -3,6 +3,7 @@
 namespace Kodeloper\Generator\Commands;
 
 use Illuminate\Console\Command;
+use Symfony\Component\Yaml\Yaml;
 
 class GeneratorCommand extends Command
 {
@@ -38,5 +39,8 @@ class GeneratorCommand extends Command
     public function handle()
     {
         $this->line('Package created using Bootpack.');
+        //$yamlContents = Yaml::parse(file_get_contents(__DIR__ . '/../base_schema.yml'));
+        $yamlContents = Yaml::parse(file_get_contents(base_path('base_schema.yml')));
+        var_dump($yamlContents);
     }
 }
