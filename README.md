@@ -1,4 +1,4 @@
-# amstaff/generator
+# kodeloper/generator
 
 Laravel project generator package
 
