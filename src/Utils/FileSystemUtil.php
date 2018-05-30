@@ -1,6 +1,6 @@
 <?php
 
-namespace Amstaff\Generator\Utils;
+namespace Kodeloper\Generator\Utils;
 
 class FileSystemUtil
 {
