@@ -1,6 +1,6 @@
 <?php
 
-Route::namespace('Amstaff\Generator\Controllers')->as('generator::')->middleware('web')->group(function () {
+Route::namespace('Kodeloper\Generator\Controllers')->as('generator::')->middleware('web')->group(function () {
     // Routes defined here have the web middleware applied
     // like the web.php file in a laravel project
     // They also have an applied controller namespace and a route names.
