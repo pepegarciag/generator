@@ -1,6 +1,6 @@
 <?php
 
-namespace Amstaff\Generator\Commands;
+namespace Kodeloper\Generator\Commands;
 
 use Illuminate\Console\Command;
 
