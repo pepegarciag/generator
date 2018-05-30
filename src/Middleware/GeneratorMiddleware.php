@@ -1,6 +1,6 @@
 <?php
 
-namespace Amstaff\Generator\Middleware;
+namespace Kodeloper\Generator\Middleware;
 
 use Auth;
 use Closure;
