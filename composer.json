@@ -1,5 +1,5 @@
 {
-    "name": "amstaff/generator",
+    "name": "kodeloper/generator",
     "description": "Laravel project generator package",
     "license": "MIT",
     "type": "library",
@@ -13,13 +13,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Amstaff\\Generator\\": "src/"
+            "Kodeloper\\Generator\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Amstaff\\Generator\\GeneratorServiceProvider"
+                "Kodeloper\\Generator\\GeneratorServiceProvider"
             ]
         }
     },
