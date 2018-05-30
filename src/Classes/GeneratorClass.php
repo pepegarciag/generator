@@ -1,8 +1,8 @@
 <?php
 
-namespace Amstaff\Generator\Classes;
+namespace Kodeloper\Generator\Classes;
 
-use Amstaff\Generator\Contracts\GeneratorContract;
+use Kodeloper\Generator\Contracts\GeneratorContract;
 
 Class GeneratorClass implements GeneratorContract
 {
