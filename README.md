@@ -13,7 +13,8 @@ Laravel project generator package
 
 - [ ] Filterable Models
 - [ ] Translatable Models
-- [ ] Q Models
+- [ ] Soft Delete Models
+- [ ] Models relations
 - [ ] API Blueprint Documentation
 - [ ] Passport
 - [ ] Social login
