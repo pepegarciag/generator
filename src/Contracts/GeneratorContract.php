@@ -1,6 +1,6 @@
 <?php
 
-namespace Amstaff\Generator\Contracts;
+namespace Kodeloper\Generator\Contracts;
 
 Interface GeneratorContract
 {
