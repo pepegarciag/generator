@@ -1,8 +1,8 @@
 <?php
 
-namespace Amstaff\Generator\Generators;
+namespace Kodeloper\Generator\Generators;
 
-use Amstaff\Generator\Utils\FileSystemUtil;
+use Kodeloper\Generator\Utils\FileSystemUtil;
 
 class BaseGenerator
 {   
