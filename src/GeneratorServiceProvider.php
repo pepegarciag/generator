@@ -1,6 +1,6 @@
 <?php
 
-namespace Amstaff\Generator;
+namespace Kodeloper\Generator;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Router;
@@ -14,7 +14,7 @@ class GeneratorServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        $router->aliasMiddleware('generator', \Amstaff\Generator\Middleware\GeneratorMiddleware::class);
+        $router->aliasMiddleware('generator', \Kodeloper\Generator\Middleware\GeneratorMiddleware::class);
 
         $this->publishes([
             __DIR__.'/Config/generator.php' => config_path('generator.php'),
@@ -42,7 +42,7 @@ class GeneratorServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->commands([
-                \Amstaff\Generator\Commands\GeneratorCommand::class,
+                \Kodeloper\Generator\Commands\GeneratorCommand::class,
             ]);
         }
     }
