@@ -1,0 +1,40 @@
+User:
+  attributes:
+    id:
+      autoincrement:true
+    username:
+      type: string(255)
+      unique:true
+      index: true
+    email:
+      type: string
+      unique:true
+    type:
+      type: enum
+      options:
+        free
+        premium
+    password:
+      type: string(255)
+  relations:
+    posts:
+      class: Post
+      foreign: user_id
+      type: hasMany
+
+Post:
+  attributes:
+    id:
+      autoincrement:true
+    title:
+      type: string
+    slug:
+      type: string
+      unique:true
+    body:
+      type: text
+    relations:
+      user:
+        class: User
+        local: user_id
+        type: belongsTo
