@@ -21,6 +21,7 @@ class GeneratorCommand extends Command
      */
     protected $description = 'Shows the generator package information';
 
+
     /**
      * Create a new command instance.
      *

@@ -20,7 +20,8 @@ return [
             'updated_at'    => 'updated_at',
             'deleted_at'    => 'deleted_at',
         ],
-        'soft_delete' => true
+        'soft_delete' => true,
+        'primary_key' => 'id'
     ],
 
     /*

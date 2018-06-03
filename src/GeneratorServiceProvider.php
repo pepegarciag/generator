@@ -4,6 +4,9 @@ namespace Kodeloper\Generator;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Router;
+use Kodeloper\Generator\Commands\GeneratorCommand;
+use Kodeloper\Generator\Commands\ModelGeneratorCommand;
+use Kodeloper\Generator\Middleware\GeneratorMiddleware;
 
 class GeneratorServiceProvider extends ServiceProvider
 {
@@ -14,7 +17,7 @@ class GeneratorServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        $router->aliasMiddleware('generator', \Kodeloper\Generator\Middleware\GeneratorMiddleware::class);
+        $router->aliasMiddleware('generator', GeneratorMiddleware::class);
 
         $this->publishes([
             __DIR__.'/Config/generator.php' => config_path('generator.php'),
@@ -42,7 +45,8 @@ class GeneratorServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->commands([
-                \Kodeloper\Generator\Commands\GeneratorCommand::class,
+                GeneratorCommand::class,
+                ModelGeneratorCommand::class,
             ]);
         }
     }

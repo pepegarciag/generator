@@ -23,7 +23,8 @@ Laravel project generator package
 - [ ] Teams
 - [ ] File Manager
 - [ ] Query API 
+- [ ] Translation manager
 
-- [ ] Comands
+- [ ] Commands
 - [ ] Generate from schema
 - [ ] Generate from DB

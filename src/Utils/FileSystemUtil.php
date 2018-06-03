@@ -6,7 +6,7 @@ class FileSystemUtil
 {
     public static function createFile($path, $file, $contents)
     {
-        self::createDirectoryIfNotExist($path,true);
+        self::createDirectoryIfNotExist($path);
         $path = $path.$file;
         file_put_contents($path, $contents);
     }

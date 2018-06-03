@@ -21,7 +21,7 @@ User:
       class: Post
       foreign: user_id
       type: hasMany
-
+  soft_delete: false
 Post:
   attributes:
     id:

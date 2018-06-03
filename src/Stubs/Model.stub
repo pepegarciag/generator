@@ -1,10 +1,28 @@
 <?php
 
-namespace DummyNamespace;
+namespace {{Namespace}};
 
-use Illuminate\Database\Eloquent\Model;
+use {{modelToExtend}};
+{{useSoftDeletes}}
 
-class DummyClass extends Model
+class {{ClassName}} extends Model
 {
-    //
+    {{softDeletes}}/**
+    * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = '{{table}}';
+
+    /**
+     * The primary key for the model.
+     *
+     * @var string
+     */
+    protected $primaryKey = '{{primaryKey}}';
+
+    {{guardedFields}};
+
+    {{relationships}}
+
 }
