@@ -20,8 +20,7 @@ class {{ClassName}} extends Model
      * @var string
      */
     protected $primaryKey = '{{primaryKey}}';
-
-    {{guardedFields}};
+    {{guardedFields}}
 
     {{relationships}}
 
