@@ -16,9 +16,11 @@ return [
         'extends' => 'Illuminate\Database\Eloquent\Model',
         'timestamps' => [
             'enabled'       => true,
-            'created_at'    => 'created_at',
-            'updated_at'    => 'updated_at',
-            'deleted_at'    => 'deleted_at',
+            'fields' => [
+                'created_at'    => 'created_at',
+                'updated_at'    => 'updated_at',
+                'deleted_at'    => 'deleted_at',
+            ]
         ],
         'soft_delete' => true,
         'primary_key' => 'id'

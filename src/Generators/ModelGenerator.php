@@ -39,7 +39,8 @@ class ModelGenerator extends BaseGenerator
              ->replaceSoftDelete()
              ->replaceTableName()
              ->replacePrimaryKey()
-             ->replaceAttributes();
+             ->replaceAttributes()
+             ->replaceDates();
 
         // $this->generateFile($this->config['path'], $this->data['model'] . '.php');
         return $this->stub;
@@ -50,8 +51,11 @@ class ModelGenerator extends BaseGenerator
         $soft_delete = isset($this->schema['soft_delete']) ? $this->schema['soft_delete'] : $this->config['soft_delete'];
 
         if ($soft_delete) {
+            $soft_delete_field = isset($this->schema['soft_delete']['field']) ?
+                $this->schema['soft_delete']['field'] : $this->config['timestamps']['fields']['deleted_at'];
             $this->stub = str_replace('{{useSoftDeletes}}', 'use Illuminate\Database\Eloquent\SoftDeletes;', $this->stub);
             $this->stub = str_replace('{{softDeletes}}', "use SoftDeletes;\n\t", $this->stub);
+            $this->dates = [$soft_delete_field => $soft_delete_field];
         } else {
             $this->stub = str_replace(['{{useSoftDeletes}}','{{softDeletes}}'], '' ,$this->stub);
         }
@@ -81,13 +85,21 @@ class ModelGenerator extends BaseGenerator
     }
 
     private function getFillableAttributes() {
-        return collect($this->schema['attributes'])->filter(function($value, $key) {
-            return $this->AttributeIsFillable($value, $key);
-        });
+        return collect($this->schema['attributes'])
+            ->filter(function($value, $key) {
+                return $this->AttributeIsFillable($value, $key);
+            });
+    }
+
+    private function getDateAttributes() {
+        return collect($this->schema['attributes'])
+            ->whereIn('type',['date','dateTime','dateTimeTz','time','timeTz','timestamp','timestampTz','year']);
     }
 
     private function getGuardedAttributes() {
-        return collect($this->schema['attributes'])->except($this->getFillableAttributes()->keys());
+        return collect($this->schema['attributes'])
+            ->except($this->getFillableAttributes()
+            ->keys());
     }
 
     private function AttributeIsFillable($attribute , $key) {
@@ -107,9 +119,9 @@ class ModelGenerator extends BaseGenerator
     private function replaceAttributes()
     {
         if ($this->useGuarded()) {
-            $this->replaceGuardedAttributes();
+            return $this->replaceGuardedAttributes();
         } else {
-            $this->replaceFillableAttributes();
+            return $this->replaceFillableAttributes();
         }
     }
 
@@ -144,6 +156,27 @@ EOT;
 EOT;
 
         $this->stub = str_replace('{{guardedFields}}', $fillable, $this->stub);
+        return $this;
+    }
+
+    private function replaceDates()
+    {
+        $dates_attributes = $this->getDateAttributes()->merge($this->dates)->keys();
+        dump($this->dates);
+        $dates = <<<EOT
+    
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected \$dates = $dates_attributes;
+EOT;
+        if ($dates_attributes->isEmpty()) {
+            $this->stub = str_replace('{{datesFields}}', '', $this->stub);
+        } else {
+            $this->stub = str_replace('{{datesFields}}', $dates, $this->stub);
+        }
         return $this;
     }
 }

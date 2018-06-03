@@ -21,7 +21,7 @@ class {{ClassName}} extends Model
      */
     protected $primaryKey = '{{primaryKey}}';
     {{guardedFields}}
-
+    {{datesFields}}
     {{relationships}}
 
 }
