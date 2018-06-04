@@ -3,7 +3,6 @@
 namespace Kodeloper\Generator\Commands;
 
 use Illuminate\Console\Command;
-use Symfony\Component\Yaml\Yaml;
 
 class BaseGeneratorCommand extends Command
 {
@@ -18,7 +17,6 @@ class BaseGeneratorCommand extends Command
      * @var Composer
      */
     public $composer;
-
 
     /**
      * Create a new command instance.
