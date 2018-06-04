@@ -2,7 +2,6 @@
 
 namespace Kodeloper\Generator\Middleware;
 
-use Auth;
 use Closure;
 
 class GeneratorMiddleware
