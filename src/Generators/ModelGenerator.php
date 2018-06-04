@@ -242,6 +242,38 @@ EOT;
 EOT;
     }
 
+    private function createRelationHasOne($relationName, $class)
+    {
+        $currentClass = strtolower($this->data['class_name']);
+
+        return $relation = <<<EOT
+
+    /**
+    * Get the $relationName associated with the $currentClass.
+    */
+    public function $relationName()
+    {
+        return \$this->hasOne($class::class);
+    }
+EOT;
+    }
+
+    private function createRelationbelongsToMany($relationName, $class)
+    {
+        $currentClass = strtolower($this->data['class_name']);
+
+        return $relation = <<<EOT
+
+    /**
+    * Get the $relationName that belong to the $currentClass.
+    */
+    public function $relationName()
+    {
+        return \$this->hasOne($class::class);
+    }
+EOT;
+    }
+
     private function replaceTraits()
     {
         if (isset($this->schema['traits'])) {
