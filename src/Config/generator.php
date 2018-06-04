@@ -11,19 +11,19 @@ return [
    |
    */
     'models' => [
-        'namespace' => 'App\Models',
-        'path' => app_path('Models/'),
-        'extends' => 'Illuminate\Database\Eloquent\Model',
+        'namespace'  => 'App\Models',
+        'path'       => app_path('Models/'),
+        'extends'    => 'Illuminate\Database\Eloquent\Model',
         'timestamps' => [
             'enabled'       => true,
-            'fields' => [
+            'fields'        => [
                 'created_at'    => 'created_at',
                 'updated_at'    => 'updated_at',
                 'deleted_at'    => 'deleted_at',
-            ]
+            ],
         ],
         'soft_delete' => true,
-        'primary_key' => 'id'
+        'primary_key' => 'id',
     ],
 
     /*
@@ -36,7 +36,7 @@ return [
    */
     'controllers' => [
         'namespace' => 'App\Http\Controllers',
-        'path' => app_path('Http/Controllers/'),
+        'path'      => app_path('Http/Controllers/'),
     ],
 
     /*
@@ -48,16 +48,16 @@ return [
     |
     */
     'api' => [
-        'routes' => base_path('routes/api.php'),
+        'routes'        => base_path('routes/api.php'),
         'route_prefix'  => 'api',
-        'version' => 'v1',
-        'controllers' => [
+        'version'       => 'v1',
+        'controllers'   => [
             'namespace' => 'App\Http\Controllers\API',
-            'path' => app_path('Http/Controllers/API/'),
+            'path'      => app_path('Http/Controllers/API/'),
         ],
         'request' => [
             'namespace'=> 'App\Http\Requests\API',
-            'path' => app_path('Http/Requests/API/'),
+            'path'     => app_path('Http/Requests/API/'),
         ],
     ],
 
