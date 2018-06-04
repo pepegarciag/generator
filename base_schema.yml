@@ -24,6 +24,7 @@ User:
       foreign: user_id
       type: hasMany
   soft_delete: false
+  migrate: true
 
 Post:
   attributes:

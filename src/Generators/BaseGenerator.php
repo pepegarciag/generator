@@ -36,7 +36,6 @@ class BaseGenerator
     public function getSchema()
     {
         $schema_file = config('generator.schema.path') ?? 'base_schema.yml';
-
         return Yaml::parse(file_get_contents(base_path($schema_file)));
     }
 
