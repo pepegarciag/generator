@@ -26,6 +26,7 @@ class FileSystemUtil
         if (file_exists($path.$file)) {
             return unlink($path.$file);
         }
+
         return false;
     }
 }
