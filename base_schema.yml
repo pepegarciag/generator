@@ -3,7 +3,8 @@ User:
     id:
       autoincrement: true
     username:
-      type: string(255)
+      type: string
+      length: 255
       unique: true
       index: true
     email:
@@ -16,7 +17,8 @@ User:
         premium
       fillable: false
     password:
-      type: string(255)
+      type: string
+      length: 150
       guarded: true
   relations:
     posts:

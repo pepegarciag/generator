@@ -52,7 +52,7 @@ class ModelGeneratorCommand extends BaseGeneratorCommand
         $command_data['model'] = ucfirst($this->argument('name'));
         $command_data['table'] = $this->option('table') ?? str_plural($this->argument('name'));
         if ($this->option('from_schema')) {
-            //$this->generator->fromSchema($command_data);
+              $this->generator->fromSchema($command_data);
             $this->line($this->migrationGenerator->fromSchema($command_data));
         } else {
             $command_data['primary_key'] = $this->option('pk') ?? config('generator.models.primary_key');
