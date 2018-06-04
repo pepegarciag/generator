@@ -45,7 +45,7 @@ class ModelGenerator extends BaseGenerator
              ->replaceDates()
              ->replaceRelationShips();
 
-        // $this->generateFile($this->config['path'], $this->data['model'] . '.php');
+        $this->generateFile($this->config['path'], $this->data['model'] . '.php');
         return $this->stub;
     }
 
@@ -201,11 +201,28 @@ EOT;
                 $this->relations[] = $this->$relationMethodName($relationName ,$class);
             }
         });
+
         $this->stub = str_replace('{{relationships}}', implode("\n", $this->relations), $this->stub);
         return $this;
     }
 
-    private function createRelationBelongsTo($relationName ,$class)
+    private function createRelationBelongsTo($relationName, $class)
+    {
+        $currentClass = strtolower($this->data['class_name']);
+        return $relation = <<<EOT
+
+    /**
+    * Get the $relationName that owns the $currentClass.
+    */
+    public function $relationName()
+    {
+        return \$this->belongsTo($class::class);
+    }
+EOT;
+
+    }
+
+    private function createRelationHasMany($relationName, $class)
     {
         $currentClass = strtolower($this->data['class_name']);
         return $relation = <<<EOT
@@ -215,15 +232,9 @@ EOT;
     */
     public function $relationName()
     {
-        return \$this->hasMany($class);
+        return \$this->hasMany($class::class);
     }
 EOT;
-
-    }
-
-    private function createRelationHasMany($relation)
-    {
-        dump("hasMany");
     }
 
 
