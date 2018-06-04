@@ -59,7 +59,8 @@ class GeneratorServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/Config/generator.php', 'generator'
+            __DIR__ . '/Config/generator.php',
+            'generator'
         );
     }
 }

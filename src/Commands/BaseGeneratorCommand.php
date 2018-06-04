@@ -41,5 +41,4 @@ class BaseGeneratorCommand extends Command
     {
         return config('generator');
     }
-
 }

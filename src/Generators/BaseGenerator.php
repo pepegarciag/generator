@@ -12,7 +12,8 @@ class BaseGenerator
     protected $config;
     protected $data;
 
-    public function generateFile ($path, $file) {
+    public function generateFile($path, $file)
+    {
         $this->rollbackOldFile($path, $file);
         FileSystemUtil::createFile($path, $file, $this->stub);
         return $this;
@@ -30,7 +31,8 @@ class BaseGenerator
         return false;
     }
 
-    public function getSchema() {
+    public function getSchema()
+    {
         $schema_file = config('generator.schema.path') ?? 'base_schema.yml';
         return Yaml::parse(file_get_contents(base_path($schema_file)));
     }
@@ -50,7 +52,8 @@ class BaseGenerator
      *
      * @return $this
      */
-    public function replaceNameSpace() {
+    public function replaceNameSpace()
+    {
         $this->stub = $stub = str_replace('{{Namespace}}', $this->config['namespace'], $this->stub);
         return $this;
     }
@@ -60,7 +63,8 @@ class BaseGenerator
      *
      * @return $this
      */
-    public function replaceClassName() {
+    public function replaceClassName()
+    {
         $this->stub = $stub = str_replace('{{ClassName}}', $this->data['class_name'], $this->stub);
         return $this;
     }

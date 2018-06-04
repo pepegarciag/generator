@@ -51,12 +51,10 @@ class ModelGeneratorCommand extends BaseGeneratorCommand
         $command_data['model'] = ucfirst($this->argument('name'));
         $command_data['table'] = $this->option('table') ?? str_plural($this->argument('name'));
         if ($this->option('from_schema')) {
-            $this->line( $this->generator->fromSchema($command_data));
-        }
-        else {
+            $this->line($this->generator->fromSchema($command_data));
+        } else {
             $command_data['primary_key'] = $this->option('pk') ?? config('generator.models.primary_key');
             $softDeletes = $this->option('soft-deletes') ?? config('generator.models.soft_delete');
         }
     }
-
 }
