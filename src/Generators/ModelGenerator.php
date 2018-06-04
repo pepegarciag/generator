@@ -13,6 +13,7 @@ class ModelGenerator extends BaseGenerator
 {
     const MAX_GUARDED = 2;
     protected $dates;
+    protected $relations = [];
     /**
      * Get the model stub file path for the generator.
      *
@@ -25,7 +26,8 @@ class ModelGenerator extends BaseGenerator
             : __DIR__ . '/../Stubs/Model.stub';
     }
 
-    public function fromSchema(Array $data) {
+    public function fromSchema(Array $data)
+    {
         $this->stub = file_get_contents($this->getStubFilePath());
         $this->schema = $this->getSchema()[$data['model']];
         $this->config = $this->getPackageConfig()['models'];
@@ -40,7 +42,8 @@ class ModelGenerator extends BaseGenerator
              ->replaceTableName()
              ->replacePrimaryKey()
              ->replaceAttributes()
-             ->replaceDates();
+             ->replaceDates()
+             ->replaceRelationShips();
 
         // $this->generateFile($this->config['path'], $this->data['model'] . '.php');
         return $this->stub;
@@ -63,46 +66,54 @@ class ModelGenerator extends BaseGenerator
         return $this;
     }
 
-    private function replaceTableName() {
+    private function replaceTableName()
+    {
         $this->stub = $stub = str_replace('{{table}}', $this->data['table'], $this->stub);
         return $this;
     }
 
-    private function replacePrimaryKey() {
+    private function replacePrimaryKey()
+    {
         $primaryKey =  $this->schema['primary_key'] ?? $this->config['primary_key'];
         $this->stub = $stub = str_replace('{{primaryKey}}', $primaryKey , $this->stub);
         return $this;
     }
 
-    private function replaceModelToExtend() {
+    private function replaceModelToExtend()
+    {
         $classToExtend = $this->schema['extends'] ?? $this->config['extends'];
         $this->stub = $stub = str_replace('{{modelToExtend}}', $classToExtend , $this->stub);
         return $this;
     }
 
-    private function getAttributes() {
+    private function getAttributes()
+    {
         return collect($this->schema['attributes']);
     }
 
-    private function getFillableAttributes() {
+    private function getFillableAttributes()
+    {
         return collect($this->schema['attributes'])
             ->filter(function($value, $key) {
                 return $this->AttributeIsFillable($value, $key);
             });
     }
 
-    private function getDateAttributes() {
+    private function getDateAttributes()
+    {
         return collect($this->schema['attributes'])
             ->whereIn('type',['date','dateTime','dateTimeTz','time','timeTz','timestamp','timestampTz','year']);
     }
 
-    private function getGuardedAttributes() {
+    private function getGuardedAttributes()
+    {
         return collect($this->schema['attributes'])
             ->except($this->getFillableAttributes()
             ->keys());
     }
 
-    private function AttributeIsFillable($attribute , $key) {
+    private function AttributeIsFillable($attribute , $key)
+    {
         if (isset($attribute['guarded']) && $attribute['guarded'] == true) {
             return false;
         }
@@ -112,7 +123,8 @@ class ModelGenerator extends BaseGenerator
         return true;
     }
 
-    private function useGuarded() {
+    private function useGuarded()
+    {
         return $this->getGuardedAttributes()->count() <= self::MAX_GUARDED;
     }
 
@@ -162,7 +174,6 @@ EOT;
     private function replaceDates()
     {
         $dates_attributes = $this->getDateAttributes()->merge($this->dates)->keys();
-        dump($this->dates);
         $dates = <<<EOT
     
     /**
@@ -179,4 +190,41 @@ EOT;
         }
         return $this;
     }
+
+    private function replaceRelationShips()
+    {
+        collect($this->schema['relations'])->each(function ($relation, $key) {
+            $relationMethodName = 'createRelation' . ucfirst(camel_case($relation['type']));
+            if (method_exists($this,  $relationMethodName)) {
+                $relationName = strtolower($key);
+                $class = $this->config['namespace'] . '\\' . $relation['class'];
+                $this->relations[] = $this->$relationMethodName($relationName ,$class);
+            }
+        });
+        $this->stub = str_replace('{{relationships}}', implode("\n", $this->relations), $this->stub);
+        return $this;
+    }
+
+    private function createRelationBelongsTo($relationName ,$class)
+    {
+        $currentClass = strtolower($this->data['class_name']);
+        return $relation = <<<EOT
+
+    /**
+    * Get the $relationName for the $currentClass.
+    */
+    public function $relationName()
+    {
+        return \$this->hasMany($class);
+    }
+EOT;
+
+    }
+
+    private function createRelationHasMany($relation)
+    {
+        dump("hasMany");
+    }
+
+
 }
