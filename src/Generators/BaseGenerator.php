@@ -23,7 +23,7 @@ class BaseGenerator
     public function rollbackOldFile($path, $file)
     {
         if (file_exists($path.$file)) {
-            if (! copy($path.$file, $path.now()->format('d_m_Y_h_i_s').'_'.$file.'._bkp')) {
+            if (!copy($path.$file, $path.now()->format('d_m_Y_h_i_s').'_'.$file.'._bkp')) {
                 return false;
             } else {
                 return FileSystemUtil::deleteFile($path, $file);
@@ -36,6 +36,7 @@ class BaseGenerator
     public function getSchema()
     {
         $schema_file = config('generator.schema.path') ?? 'base_schema.yml';
+
         return Yaml::parse(file_get_contents(base_path($schema_file)));
     }
 
