@@ -3,8 +3,6 @@
 namespace Kodeloper\Generator\Commands;
 
 use Kodeloper\Generator\Generators\ModelGenerator;
-use Symfony\Component\Yaml\Yaml;
-use Kodeloper\Generator\Commands\BaseGeneratorCommand;
 
 class ModelGeneratorCommand extends BaseGeneratorCommand
 {
@@ -28,6 +26,7 @@ class ModelGeneratorCommand extends BaseGeneratorCommand
     protected $description = 'Create new  model command';
 
     private $generator;
+
     /**
      * Create a new command instance.
      *

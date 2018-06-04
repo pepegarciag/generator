@@ -16,7 +16,7 @@ class FileSystemUtil
         if (file_exists($path) && $replace) {
             rmdir($path);
         }
-        if (!file_exists($path)) {
+        if (! file_exists($path)) {
             mkdir($path, 0755, true);
         }
     }
@@ -26,6 +26,7 @@ class FileSystemUtil
         if (file_exists($path.$file)) {
             return unlink($path.$file);
         }
+
         return false;
     }
 }
