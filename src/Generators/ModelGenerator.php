@@ -32,6 +32,7 @@ class ModelGenerator extends BaseGenerator
              ->replaceModelToExtend()
              ->replaceClassName()
              ->replaceSoftDelete()
+             ->replaceTraits()
              ->replaceTableName()
              ->replacePrimaryKey()
              ->replaceAttributes()
@@ -228,4 +229,19 @@ EOT;
     }
 EOT;
     }
+
+    private function replaceTraits()
+    {
+        if (isset($this->schema['traits'])) {
+            $traits = collect($this->schema['traits'])->map(function ($trait, $key) {
+                return 'use '.$trait.';';
+            });
+            $this->stub = str_replace('{{useTraits}}', $traits->implode("\n"), $this->stub);
+            $this->stub = str_replace('{{Traits}}', 'use '.$traits->keys()->implode(",").';', $this->stub);
+        } else {
+            $this->stub = str_replace(['{{useTraits}}','{{Traits}}'], '', $this->stub);
+        }
+        return $this;
+    }
+
 }

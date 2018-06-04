@@ -3,10 +3,12 @@
 namespace {{Namespace}};
 
 use {{modelToExtend}};
+{{useTraits}}
 {{useSoftDeletes}}
 
 class {{ClassName}} extends Model
 {
+    {{Traits}}
     {{softDeletes}}/**
     * The table associated with the model.
      *
