@@ -29,6 +29,7 @@ User:
     HasTranslations: App\Http\Traits\HasTranslations
     HasTeam: App\Http\Traits\HasTeam
 
+
 Post:
   attributes:
     id:
