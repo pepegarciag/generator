@@ -15,11 +15,11 @@ return [
         'path'       => app_path('Models/'),
         'extends'    => 'Illuminate\Database\Eloquent\Model',
         'timestamps' => [
-            'enabled'       => true,
-            'fields'        => [
-                'created_at'    => 'created_at',
-                'updated_at'    => 'updated_at',
-                'deleted_at'    => 'deleted_at',
+            'enabled' => true,
+            'fields' => [
+                'created_at' => 'created_at',
+                'updated_at' => 'updated_at',
+                'deleted_at' => 'deleted_at',
             ],
         ],
         'soft_delete' => true,
@@ -48,16 +48,16 @@ return [
     |
     */
     'api' => [
-        'routes'        => base_path('routes/api.php'),
-        'route_prefix'  => 'api',
-        'version'       => 'v1',
-        'controllers'   => [
+        'routes' => base_path('routes/api.php'),
+        'route_prefix' => 'api',
+        'version' => 'v1',
+        'controllers' => [
             'namespace' => 'App\Http\Controllers\API',
             'path'      => app_path('Http/Controllers/API/'),
         ],
         'request' => [
-            'namespace'=> 'App\Http\Requests\API',
-            'path'     => app_path('Http/Requests/API/'),
+            'namespace' => 'App\Http\Requests\API',
+            'path' => app_path('Http/Requests/API/'),
         ],
     ],
 

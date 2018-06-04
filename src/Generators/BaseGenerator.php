@@ -2,8 +2,8 @@
 
 namespace Kodeloper\Generator\Generators;
 
-use Kodeloper\Generator\Utils\FileSystemUtil;
 use Symfony\Component\Yaml\Yaml;
+use Kodeloper\Generator\Utils\FileSystemUtil;
 
 class BaseGenerator
 {

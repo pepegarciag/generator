@@ -24,6 +24,11 @@ User:
       foreign: user_id
       type: hasMany
   soft_delete: false
+  traits:
+    Filterable: App\Http\Traits\Filterable
+    HasTranslations: App\Http\Traits\HasTranslations
+    HasTeam: App\Http\Traits\HasTeam
+
 
 Post:
   attributes:
